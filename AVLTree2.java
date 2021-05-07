@@ -205,6 +205,28 @@ public class AVLTree2 {
         return root;
     }
 
+    public Node search(Node p, int el) {
+        while (p != null) {
+            /* se valor procurado == chave do nó retorna referência ao nó */
+            if (el == p.value) {
+                System.out.println("Chave encontrada em " + p.value + ", altura (" + p.height + ")");
+                return p;
+            }
+                /* se valor procurado < chave do nó, procurar na sub-árvore esquerda deste nó */
+            else if (el < p.value) {
+                System.out.println("Passando pelo elemento " + p.value + ", altura (" + p.height + ")");
+                p = p.left;
+            }
+                /* se valor procurado > chave do nó, procurar na sub-árvore direita deste nó */
+            else {
+                System.out.println("Passando pelo elemento " + p.value + ", altura (" + p.height + ")");
+                p = p.right;
+            }
+        }
+        // caso chave não foi achada, retorna null
+        return null;
+    }
+
     public void print(Node root) {
 
         if(root == null) {
@@ -293,105 +315,31 @@ public class AVLTree2 {
     public static void main(String args[]) {
         AVLTree2 t = new AVLTree2();
         Node root = null;
-        while (true) {
-            System.out.println("(1) Insert");
-            System.out.println("(2) Delete");
 
-            try {
-                BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
-                String s = bufferRead.readLine();
 
-                if (Integer.parseInt(s) == 1) {
-                    System.out.print("Value to be inserted: ");
-                    root = t.insert(root, Integer.parseInt(bufferRead.readLine()));
-                }
-                else if (Integer.parseInt(s) == 2) {
-                    System.out.print("Value to be deleted: ");
-                    root = t.deleteNode(root, Integer.parseInt(bufferRead.readLine()));
-                }
-                else {
-                    System.out.println("Invalid choice, try again!");
-                    continue;
-                }
-
-                t.print(root);
-            }
-            catch(IOException e) {
-                e.printStackTrace();
-            }
+        System.out.println("\n\n");
+        t.print(root);
+        System.out.println("Insert");
+        for(int i=1;i<=9;i++){
+            root = t.insert(root, i);
+            System.out.println("\n=======================================================================\n");
+            System.out.println("Inserindo o valor: "+i);
+            t.print(root);
         }
-        
-        // System.out.println("\nInserções\n");
-        // t.print(root);
-        // System.out.println("\n=======================================================================\n");
-        // t.insert(root, 1);
-        // t.print(root);
-        // System.out.println("\n=======================================================================\n");
-        // t.insert(root, 2);
-        // t.print(root);
-        // System.out.println("\n=======================================================================\n");
-        // t.insert(root, 3);
-        // t.print(root);
-        // System.out.println("\n=======================================================================\n");
-        // t.insert(root, 4);
-        // t.print(root);
-        // System.out.println("\n=======================================================================\n");
-        // t.insert(root, 5);
-        // t.print(root);
-        // System.out.println("\n=======================================================================\n");
-        // t.insert(root, 6);
-        // t.print(root);
-        // System.out.println("\n=======================================================================\n");
-        // t.insert(root, 7);
-        // t.print(root);
-        // System.out.println("\n=======================================================================\n");
-        // t.insert(root, 8);
-        // t.print(root);
-        // System.out.println("\n=======================================================================\n");
-        // t.insert(root,9);
-        // t.print(root);
-        // System.out.println("\n=======================================================================\n");
-
-        // System.out.println("\nBusca\n");
-
-        // t.search(1);
-
-        // System.out.println("\n=======================================================================\n");
-
-        // t.search(9);
-
-        // System.out.println("\nRemoção\n");
-
-        // t.print(root);
-
-        // System.out.println("\n=======================================================================\n");
-        // t.deleteNode(root, 1);
-        // t.print(root);
-        // System.out.println("\n=======================================================================\n");
-        // t.deleteNode(root, 2);
-        // t.print(root);
-        // System.out.println("\n=======================================================================\n");
-        // t.deleteNode(root, 3);
-        // t.print(root);
-        // System.out.println("\n=======================================================================\n");
-        // t.deleteNode(root, 4);
-        // t.print(root);
-        // System.out.println("\n=======================================================================\n");
-        // t.deleteNode(root, 5);
-        // t.print(root);
-        // System.out.println("\n=======================================================================\n");
-        // t.deleteNode(root, 6);
-        // t.print(root);
-        // System.out.println("\n=======================================================================\n");
-        // t.deleteNode(root, 7);
-        // t.print(root);
-        // System.out.println("\n=======================================================================\n");
-        // t.deleteNode(root, 8);
-        // t.print(root);
-        // System.out.println("\n=======================================================================\n");
-        // t.deleteNode(root, 9);
-        // t.print(root);
-        // System.out.println("\n=======================================================================\n");
-
+        System.out.println("\n=======================================================================\n");
+        System.out.println("search");
+        System.out.println("\nPesquisando o valor: "+4+"\n");
+        t.search(root, 4);
+        System.out.println("\n=======================================================================\n");
+        System.out.println("\nPesquisando o valor: "+9+"\n");
+        t.search(root, 9);
+        System.out.println("\n=======================================================================\n");
+        System.out.println("delete");
+        for(int i=1;i<=9;i++){
+            root = t.deleteNode(root, i);
+            System.out.println("\n=======================================================================\n");
+            System.out.println("Removendo o valor: "+i+"\n");
+            t.print(root);
+        }
     }
 }
